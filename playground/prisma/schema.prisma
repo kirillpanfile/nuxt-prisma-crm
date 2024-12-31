@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator jsonSchema {
+  provider                 = "prisma-json-schema-generator"
+  output                   = "./prisma/schema.json"
+  keepRelationScalarFields = "true"
+  schemaId                 = "some-schema-id"
+  includeRequiredFields    = "true"
+  persistOriginalType      = "true"
+  forceAnyOf               = "false"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ContactForm {
+  id        Int      @id @default(autoincrement())
+  email     String
+  name      String
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id            Int            @id @default(autoincrement())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  name          String
+  description   String
+  price         Float
+  orderProducts OrderProduct[]
+}
+
+model Order {
+  id            Int            @id @default(autoincrement())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  orderProducts OrderProduct[]
+}
+
+model OrderProduct {
+  productId Int
+  orderId   Int
+  
+  quantity  Int
+
+  Product   Product @relation(fields: [productId], references: [id])
+  Order     Order   @relation(fields: [orderId], references: [id])
+
+  @@id([orderId, productId])
+}

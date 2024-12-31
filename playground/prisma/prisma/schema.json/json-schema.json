@@ -1,0 +1,159 @@
+{
+  "$id": "some-schema-id",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ContactForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "originalType": "Int"
+        },
+        "email": {
+          "type": "string",
+          "originalType": "String"
+        },
+        "name": {
+          "type": "string",
+          "originalType": "String"
+        },
+        "message": {
+          "type": "string",
+          "originalType": "String"
+        },
+        "createdAt": {
+          "type": "string",
+          "originalType": "DateTime",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "originalType": "DateTime",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "email",
+        "name",
+        "message",
+        "updatedAt"
+      ]
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "originalType": "Int"
+        },
+        "createdAt": {
+          "type": "string",
+          "originalType": "DateTime",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "originalType": "DateTime",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string",
+          "originalType": "String"
+        },
+        "description": {
+          "type": "string",
+          "originalType": "String"
+        },
+        "price": {
+          "type": "number",
+          "originalType": "Float"
+        },
+        "orderProducts": {
+          "type": "array",
+          "originalType": "OrderProduct",
+          "items": {
+            "$ref": "some-schema-id#/definitions/OrderProduct"
+          }
+        }
+      },
+      "required": [
+        "updatedAt",
+        "name",
+        "description",
+        "price"
+      ]
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "originalType": "Int"
+        },
+        "createdAt": {
+          "type": "string",
+          "originalType": "DateTime",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "originalType": "DateTime",
+          "format": "date-time"
+        },
+        "orderProducts": {
+          "type": "array",
+          "originalType": "OrderProduct",
+          "items": {
+            "$ref": "some-schema-id#/definitions/OrderProduct"
+          }
+        }
+      },
+      "required": [
+        "updatedAt"
+      ]
+    },
+    "OrderProduct": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "integer",
+          "originalType": "Int"
+        },
+        "orderId": {
+          "type": "integer",
+          "originalType": "Int"
+        },
+        "quantity": {
+          "type": "integer",
+          "originalType": "Int"
+        },
+        "Product": {
+          "$ref": "some-schema-id#/definitions/Product"
+        },
+        "Order": {
+          "$ref": "some-schema-id#/definitions/Order"
+        }
+      },
+      "required": [
+        "productId",
+        "orderId",
+        "quantity"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "contactForm": {
+      "$ref": "some-schema-id#/definitions/ContactForm"
+    },
+    "product": {
+      "$ref": "some-schema-id#/definitions/Product"
+    },
+    "order": {
+      "$ref": "some-schema-id#/definitions/Order"
+    },
+    "orderProduct": {
+      "$ref": "some-schema-id#/definitions/OrderProduct"
+    }
+  }
+}
