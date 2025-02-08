@@ -17,7 +17,7 @@ const sidebarItems: Array<SidebarItem> = [
 </script>
 
 <template>
-  <aside class="flex flex-col h-full max-h-screen gap-2 bg-white">
+  <aside class="flex flex-col h-screen gap-2 bg-white">
     <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
       <a href="/" class="flex items-center gap-2 font-semibold">
         <span class="">{{ prismaCrmConfig.appName }}</span>
