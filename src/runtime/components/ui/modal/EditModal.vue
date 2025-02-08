@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { createDynamicFormData } from '../../../helpers/createDynamicFormData'
+import { createDynamicFormData } from '../../../../utils/createDynamicFormData'
 import { useEventDataRequests } from '../../../hooks/useEventDataRequests'
 import { currentActiveModal, useModals } from '../../../hooks/useModals'
-import { usePageMetadata } from '../../../hooks/usePageMetadata'
+import { usePageMetadata } from '../../../../hooks/usePageMetadata'
 import BaseButton from '../button/BaseButton.vue'
 import BaseInput from '../input/BaseInput.vue'
 import BaseModal from './BaseModal.vue'

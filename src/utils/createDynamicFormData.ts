@@ -25,6 +25,7 @@ export function createDynamicFormData(populateData: any = ref({})): DynamicFormD
   const initialData: [string, any][] = Object.entries(
     currentAppInstance.value?.definition,
   ).filter(
+    // @ts-expect-error - hidden is not defined
     ([key, value]) => !value?.hidden && !creationFiledExclude.includes(key),
   )
   const customValidations
@@ -35,6 +36,7 @@ export function createDynamicFormData(populateData: any = ref({})): DynamicFormD
       return fallback
     }
 
+    // @ts-expect-error - customValidations is not defined
     if (customValidations[key] && customValidations[key].includes('email')) {
       return 'email'
     }

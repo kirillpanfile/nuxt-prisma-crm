@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '../../components/ui/select'
 import { Table as BaseTable, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../components/ui/table'
-import { getDynamicColumnDef } from '../../helpers/makeDataTableColumnDefs'
+import { getDynamicColumnDef } from '../../../utils/makeDataTableColumnDefs'
 import { useModals } from '../../hooks/useModals'
 
 const props = withDefaults(defineProps<{

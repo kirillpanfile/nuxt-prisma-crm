@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { Breadcrumb, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '../../components/ui/breadcrumb'
-import { usePageMetadata } from '../../hooks/usePageMetadata'
+import { usePageMetadata } from '../../../hooks/usePageMetadata'
 
 const route = useRoute()
 const { nuxtPrismaAdmin } = usePageMetadata()

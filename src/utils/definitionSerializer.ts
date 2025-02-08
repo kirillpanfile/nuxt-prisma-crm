@@ -1,4 +1,4 @@
-import type { ConfiguratorDefinition } from '../../types'
+import type { ConfiguratorDefinition } from '../types'
 
 const fieldToMarkAsHidden = [
   'createdAt',
@@ -20,6 +20,7 @@ export function definitionSerializer(definition: ConfiguratorDefinition): any {
 
   const properties = Object.entries(definition.properties)
   return properties.reduce((acc, [key, value]) => {
+    // @ts-expect-error - hidden is not defined
     acc[key] = {
       type: getJStype(value.type),
       required: definition.required?.includes(key) || false,

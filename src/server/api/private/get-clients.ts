@@ -1,4 +1,4 @@
-import prisma from '../../runtime/lib/prisma'
+import prisma from '~crm/src/utils/prisma'
 
 export default defineEventHandler(async () => {
   try {

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { usePageMetadata } from '../../hooks/usePageMetadata'
 import DashboardDataTable from '../components/dashboard/DashboardDataTable.vue'
 import DashboardPage from '../components/dashboard/DashboardPage.vue'
 import CreateModal from '../components/ui/modal/CreateModal.vue'
 import EditModal from '../components/ui/modal/EditModal.vue'
 import { useEventDataRequests } from '../hooks/useEventDataRequests'
-import { usePageMetadata } from '../hooks/usePageMetadata'
 
 const { currentAppInstance } = usePageMetadata()
 const { getBaseDatatable, deleteEntity } = useEventDataRequests()
