@@ -1,11 +1,14 @@
 import { Prisma } from '@prisma/client'
 import prisma from '~crm/src/utils/prisma'
+import validateJWTToken from '../../helpers/validateToken'
 
 interface RequestQuery {
   model: Prisma.ModelName
 }
 
 export default defineEventHandler(async (event) => {
+  validateJWTToken(event, { sendError: true })
+
   const queryParams = getQuery<RequestQuery>(event)
 
   if (!queryParams.model) {

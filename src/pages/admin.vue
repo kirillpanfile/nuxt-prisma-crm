@@ -1,15 +1,9 @@
 <script lang="ts" setup>
-// import useHttpRequest from '../hooks/useHttpRequest'
-
 definePageMeta({
   path: '/private/admin',
   layout: 'private-admin',
   middleware: 'validate-auth',
 })
-
-// const { data, error } = await useAsyncData(async () => {
-//   return await useHttpRequest('/api/private/get-clients')
-// })
 </script>
 
 <template>

@@ -1,6 +1,12 @@
 <script lang="ts" setup>
 import type { SuperUser } from '@prisma/client'
-import useAuthState from '../../hooks/useAuthState'
+import type { DefaultServerError } from '~crm/src/server/types'
+import useAuthState from '~crm/src/hooks/useAuthState'
+import useHttpRequest from '~crm/src/hooks/useHttpRequest'
+
+interface LoginResponse {
+  token: number
+}
 
 definePageMeta({
   path: '/private/admin/auth/login',
@@ -14,10 +20,10 @@ const superUser = shallowReactive<Omit<SuperUser, 'id'>>({
   password: '',
 })
 
-const { mutateAsync, error } = useMutation({
+const { mutateAsync, error } = useMutation<LoginResponse, DefaultServerError>({
   mutationKey: ['private.admin.auth.login'],
   mutationFn: async () => {
-    const response = await $fetch<{ token: number }>('/api/private/auth/login', { method: 'POST', body: superUser })
+    const response = await useHttpRequest('/api/private/auth/login', { method: 'POST', body: superUser })
     return response
   },
   onSuccess: (response) => {

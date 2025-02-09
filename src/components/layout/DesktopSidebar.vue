@@ -11,36 +11,41 @@ interface SidebarItem {
 }
 
 const sidebarItems: Array<SidebarItem> = [
-  { title: 'Dashboard', href: '/private/admin', icon: 'uil:home-alt', separator: 'bottom' },
   ...prismaCrmConfig.apps,
 ]
 </script>
 
 <template>
-  <aside class="flex flex-col h-screen gap-2 bg-white">
-    <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-      <a href="/" class="flex items-center gap-2 font-semibold">
-        <span class="">{{ prismaCrmConfig.appName }}</span>
-      </a>
-    </div>
-    <div class="flex-1">
-      <nav class="grid items-start px-2 text-sm font-medium lg:px-4">
-        <template
-          v-for="item in sidebarItems"
-          :key="item.title"
-        >
-          <hr v-if="item.separator === 'top'" class="h-px my-2 bg-black/20">
+  <aside class="flex flex-col h-screen px-5 py-8 overflow-y-auto bg-[#fff]">
+    <nuxt-link to="/private/admin" class="pr-4">
+      <Icon name="local:logo" class="w-full h-full" width="134" />
+    </nuxt-link>
+
+    <div class="flex flex-col justify-between flex-1 mt-6">
+      <nav class="-mx-3 space-y-6 ">
+        <div class="space-y-3 ">
+          <label class="px-3 text-xs text-gray-500 uppercase ">analytics</label>
+          <nuxt-link to="/private/admin" class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700" href="#">
+            <Icon name="uil:home-alt" class="w-5 h-5" />
+            <span class="mx-2 text-sm font-medium">Dashboard</span>
+          </nuxt-link>
+        </div>
+
+        <div class="space-y-3 ">
+          <label class="px-3 text-xs text-gray-500 uppercase ">content</label>
 
           <nuxt-link
+            v-for="item in sidebarItems"
+            :key="item.title"
             :to="item.href"
-            active-class="router-link-active"
-            class="flex items-center gap-3 px-3 py-2 transition-all rounded-lg text-muted-foreground hover:text-primary"
+            class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
           >
-            <!-- <icon :name="item.icon" class="w-5 h-5" /> -->
-            {{ item.title }}
+            <Icon :name="item.icon" class="w-5 h-5" />
+            <span class="mx-2 text-sm font-medium">
+              {{ item.title }}
+            </span>
           </nuxt-link>
-          <hr v-if="item.separator === 'bottom'" class="h-px my-2 bg-black/20">
-        </template>
+        </div>
       </nav>
     </div>
   </aside>
