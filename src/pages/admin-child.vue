@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import MaterialSymbolsDeleteForeverOutlineSharp from '~icons/material-symbols/delete-forever-outline-sharp'
-import MaterialSymbolsEditSquareOutline from '~icons/material-symbols/edit-square-outline'
 import useHttpRequest from '../hooks/useHttpRequest'
 import { usePageMetadata } from '../hooks/usePageMetadata'
 
@@ -86,8 +84,8 @@ onServerPrefetch(async () => {
           </td>
           <td colspan="100" class="px-4 py-2 border">
             <div class="flex items-center justify-center space-x-2">
-              <material-symbols-delete-forever-outline-sharp class="w-6 h-6 cursor-pointer" />
-              <material-symbols-edit-square-outline class="w-6 h-6 cursor-pointer" />
+              <Icon name="material-symbols:delete-forever-outline" class="w-6 h-6 cursor-pointer" />
+              <Icon name="material-symbols:edit-square-outline" class="w-6 h-6 cursor-pointer" />
             </div>
           </td>
         </tr>
