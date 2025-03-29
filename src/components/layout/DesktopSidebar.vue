@@ -18,7 +18,7 @@ const sidebarItems: Array<SidebarItem> = [
 <template>
   <aside class="flex flex-col h-screen px-5 py-8 overflow-y-auto bg-[#fff]">
     <nuxt-link to="/private/admin" class="pr-4">
-      <Icon name="local:logo" class="w-full h-full" width="134" />
+      <LazyIcon hydrate-never name="local:logo" class="w-full h-full" width="134" />
     </nuxt-link>
 
     <div class="flex flex-col justify-between flex-1 mt-6">
@@ -26,7 +26,7 @@ const sidebarItems: Array<SidebarItem> = [
         <div class="space-y-3 ">
           <label class="px-3 text-xs text-gray-500 uppercase ">analytics</label>
           <nuxt-link to="/private/admin" class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700" href="#">
-            <Icon name="uil:home-alt" class="w-5 h-5" />
+            <LazyIcon hydrate-never name="uil:home-alt" class="w-5 h-5" />
             <span class="mx-2 text-sm font-medium">Dashboard</span>
           </nuxt-link>
         </div>
@@ -40,7 +40,7 @@ const sidebarItems: Array<SidebarItem> = [
             :to="item.href"
             class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700"
           >
-            <Icon :name="item.icon" class="w-5 h-5" />
+            <LazyIcon hydrate-never :name="item.icon" class="w-5 h-5" />
             <span class="mx-2 text-sm font-medium">
               {{ item.title }}
             </span>
