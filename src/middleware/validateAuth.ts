@@ -1,7 +1,7 @@
 import useAuthState from '../hooks/useAuthState'
 import useHttpRequest from '../hooks/useHttpRequest'
 
-export default async function () {
+export default defineNuxtRouteMiddleware(async () => {
   const { isAdminUserAuth } = useAuthState()
 
   try {
@@ -12,4 +12,4 @@ export default async function () {
     isAdminUserAuth.value = false
     return await navigateTo('/private/admin/login')
   }
-}
+})
