@@ -1,4 +1,5 @@
-import { type ColumnDef, createColumnHelper, type Row } from '@tanstack/vue-table'
+import type { ColumnDef, Row } from '@tanstack/vue-table'
+import { createColumnHelper } from '@tanstack/vue-table'
 import { useDatatable } from '../runtime/hooks/useDatatable'
 
 interface GetDynamicColumnDefCustomOptions {

@@ -7,7 +7,7 @@ const creationFiledExclude = Object.freeze([
   'updatedAt',
 ])
 
-type DynamicFormData = Record< string, {
+type DynamicFormData = Record<string, {
   type: string
   value: string
   required: boolean

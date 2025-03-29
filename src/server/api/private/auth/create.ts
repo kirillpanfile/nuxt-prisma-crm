@@ -1,7 +1,8 @@
-import { Prisma, type SuperUser } from '@prisma/client'
-import JwtHelpers from '~crm/src/server/helpers/jwtHelpers'
-import PasswordHelpers from '~crm/src/server/helpers/passwordHelpers'
-import prisma from '~crm/src/utils/prisma'
+import type { SuperUser } from '@prisma/client'
+import { Prisma } from '@prisma/client'
+import JwtHelpers from '~crm/server/helpers/jwtHelpers'
+import PasswordHelpers from '~crm/server/helpers/passwordHelpers'
+import prisma from '~crm/utils/prisma'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<Omit<SuperUser, 'id'>>(event)

@@ -1,0 +1,1 @@
+export { default } from "file:///Users/kirillpanfile/Desktop/admin/nuxt-prisma-crm/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"

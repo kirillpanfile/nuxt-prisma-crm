@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client'
-import prisma from '~crm/src/utils/prisma'
+import prisma from '~crm/utils/prisma'
 import validateJWTToken from '../../helpers/validateToken'
 
 interface RequestQuery {

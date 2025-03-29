@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { prismaCrmConfig } from '~~/shared/prismaCrmConfig'
-
 interface SidebarItem {
   title: string
   href: string
@@ -9,6 +7,8 @@ interface SidebarItem {
   separator?: 'top' | 'bottom'
   children?: Array<Omit<SidebarItem, 'children'>>
 }
+
+const prismaCrmConfig = inject<any>('prismaCrmConfig')
 
 const sidebarItems: Array<SidebarItem> = [
   ...prismaCrmConfig.apps,

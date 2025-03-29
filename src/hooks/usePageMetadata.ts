@@ -1,14 +1,14 @@
-import { prismaCrmConfig } from '~shared/prismaCrmConfig'
+export function usePageMetadata(overridePrismaCrmConfig?: any) {
+  const prismaCrmConfig = overridePrismaCrmConfig || inject<any>('prismaCrmConfig')
 
-export function usePageMetadata() {
   const { $router } = useNuxtApp()
 
-  const pageId = computed(() => {
-    return ($router.currentRoute.value?.params as any)?.id
+  const pageSlug = computed(() => {
+    return ($router.currentRoute.value?.params as any)?.slug
   })
 
   const currentAppInstance = computed(() => {
-    const app = prismaCrmConfig.apps.find(app => app.href.includes(pageId.value))
+    const app = prismaCrmConfig.apps.find((app: any) => app.href.includes(pageSlug.value))
     if (!app) {
       return null
     }
@@ -16,7 +16,7 @@ export function usePageMetadata() {
   })
 
   return {
-    pageId,
+    pageSlug,
     currentAppInstance,
   }
 }
