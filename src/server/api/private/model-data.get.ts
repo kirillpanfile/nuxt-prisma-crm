@@ -27,6 +27,7 @@ export default defineEventHandler(async (event) => {
     return data
   }
   catch (error) {
+    console.log(error)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       return createError({ statusCode: 400, message: error.message })
     }
