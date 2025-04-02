@@ -1,0 +1,10 @@
+{
+  "name": "external",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "artillery run test.yml"
+  },
+  "dependencies": {
+    "artillery": "^2.0.22"
+  }
+}

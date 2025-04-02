@@ -6,7 +6,15 @@ const fieldToMarkAsHidden = [
   'deletedAt',
 ]
 
-export function definitionSerializer(definition: ConfiguratorDefinition, customFields: string[] = []): any {
+export function definitionSerializer({
+  definition,
+  customFields = [],
+  includeOnlyFields = [],
+}: {
+  definition: ConfiguratorDefinition
+  customFields: string[]
+  includeOnlyFields: string[]
+}): any {
   if (definition.type !== 'object') {
     return {}
   }
@@ -18,7 +26,12 @@ export function definitionSerializer(definition: ConfiguratorDefinition, customF
     return type
   }
 
-  const properties = Object.entries(definition.properties).filter(([key]) => !customFields.includes(key))
+  const properties = Object.entries(definition.properties).filter(([key]) => {
+    if (includeOnlyFields.length > 0) {
+      return includeOnlyFields.includes(key)
+    }
+    return !customFields.includes(key)
+  })
 
   return properties.reduce((acc, [key, value]) => {
     // @ts-expect-error - hidden is not defined

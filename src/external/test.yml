@@ -1,0 +1,10 @@
+config:
+  target: 'https://dev.spaceflow.md'
+  phases:
+    - duration: 60
+      arrivalRate: 400
+
+scenarios:
+  - flow:
+      - get:
+          url: /api/private/auth/validate
