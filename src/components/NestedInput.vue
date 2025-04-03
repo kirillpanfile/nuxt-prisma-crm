@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-import { useField } from 'vee-validate'
-import { FormField, FormItem } from './ui/form'
-import FormLabel from './ui/form/FormLabel.vue'
+import type { DateValue } from 'reka-ui'
+import DatePicker from './DatePicker.vue'
 import Input from './ui/input/Input.vue'
+import Textarea from './ui/textarea/Textarea.vue'
 
 const props = defineProps<{
-  name: string
-  modelValue?: any
+  label?: string
   type?: string
+  required?: boolean
+  errorMessage?: string
 }>()
 
 const emit = defineEmits<{
@@ -15,19 +16,25 @@ const emit = defineEmits<{
   (e: 'change', payload: string | number): void
 }>()
 
-const { value } = useField<string>(props.name)
+const model = defineModel<any>()
 
-watch(value, (newValue) => {
-  emit('update:modelValue', newValue)
-})
+const renderableComponents = {
+  text: Input,
+  textarea: Textarea,
+  number: Input,
+  file: Input,
+  date: DatePicker,
+}
 </script>
 
 <template>
-  <FormField :name="name">
-    <FormItem>
-      <FormLabel>{{ name }}</FormLabel>
-      <Input v-model="value" :type="type" class="!mt-1" @change="emit('change', $event)" />
-      <FormMessage />
-    </FormItem>
-  </FormField>
+  <div class="flex flex-col gap-1 mt-4">
+    <Label v-if="label">
+      {{ label }}<span v-if="required" class="text-red-500">*</span>
+    </Label>
+    <component :is="renderableComponents[type]" v-model="model" :required="required" :type="type" class="!mt-1" @change="emit('change', $event)" />
+    <p v-if="errorMessage" class="text-sm text-red-500">
+      {{ errorMessage }}
+    </p>
+  </div>
 </template>

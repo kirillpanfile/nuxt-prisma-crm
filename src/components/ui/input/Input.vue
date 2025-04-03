@@ -5,7 +5,7 @@ import { cn } from '~crm/lib/utils'
 
 const props = defineProps<{
   defaultValue?: string | number
-  modelValue?: string | number
+  modelValue?: string | number | File
   class?: HTMLAttributes['class']
   type?: HTMLInputElement['type']
 }>()
