@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { DateValue } from 'reka-ui'
 import DatePicker from './DatePicker.vue'
+import SelectInput from './SelectInput.vue'
 import Input from './ui/input/Input.vue'
 import Textarea from './ui/textarea/Textarea.vue'
 
@@ -9,6 +9,11 @@ const props = defineProps<{
   type?: string
   required?: boolean
   errorMessage?: string
+
+  options?: {
+    label: string
+    value: string
+  }[]
 }>()
 
 const emit = defineEmits<{
@@ -24,6 +29,7 @@ const renderableComponents = {
   number: Input,
   file: Input,
   date: DatePicker,
+  select: SelectInput,
 }
 </script>
 
@@ -32,7 +38,7 @@ const renderableComponents = {
     <Label v-if="label">
       {{ label }}<span v-if="required" class="text-red-500">*</span>
     </Label>
-    <component :is="renderableComponents[type]" v-model="model" :required="required" :type="type" class="!mt-1" @change="emit('change', $event)" />
+    <component :is="renderableComponents[type as keyof typeof renderableComponents]" v-model="model" :required :type :options class="!mt-1" @change="emit('change', $event)" />
     <p v-if="errorMessage" class="text-sm text-red-500">
       {{ errorMessage }}
     </p>

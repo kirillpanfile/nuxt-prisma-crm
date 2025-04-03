@@ -17,7 +17,7 @@ defineProps<{
     </div>
     <slot name="actions" />
   </div>
-  <div class="flex-1 px-4 py-1 -mx-4 overflow-auto lg:flex-row lg:space-x-12 lg:space-y-0">
+  <div class="flex-1 px-4 py-1 -mx-4 overflow-hidden lg:flex-row lg:space-x-12 lg:space-y-0">
     <slot />
   </div>
 </template>
