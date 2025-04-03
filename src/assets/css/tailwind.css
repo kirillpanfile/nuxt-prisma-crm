@@ -139,7 +139,6 @@
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -148,7 +147,7 @@
   }
 
   html {
-    @apply overflow-hidden bg-background;
+    @apply overflow-x-hidden bg-background;
   }
 
   body {
