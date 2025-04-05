@@ -70,7 +70,7 @@ const serializeDataForTableRender = computed(() => {
 </script>
 
 <template>
-  <Table class="w-full overflow-hidden rounded-md">
+  <Table class="w-full overflow-hidden rounded-md" v-if="serializeDataForTableRender.length > 0">
     <TableHeader>
       <TableRow>
         <TableHead
@@ -99,6 +99,8 @@ const serializeDataForTableRender = computed(() => {
       </TableRow>
     </TableBody>
   </Table>
+
+  <div v-else class="flex items-center justify-center w-full h-full py-24 my-auto mt-8 text-2xl font-bold rounded-lg bg-muted/50 outline-muted outline outline-2">Table is empty!</div>
 </template>
 
 <style>

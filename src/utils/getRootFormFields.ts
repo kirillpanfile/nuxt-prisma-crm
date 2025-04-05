@@ -22,6 +22,7 @@ export function getRootFormFields<T>({
 }: Options) {
   const form = ref<T>({} as T)
   const errors = ref<any>({})
+  const formRef = ref<HTMLFormElement | null>(null)
 
   const typeMap = { integer: 'number', string: 'text' } as const
   const fields = Object.entries(schema.properties).filter(([key]) => !fieldsToOmit.includes(key))
@@ -51,7 +52,14 @@ export function getRootFormFields<T>({
     }
   })
 
+  const resetForm = () => nextTick(() => {
+    formRef.value?.reset()
+  })
+  
+
   return {
+    formRef,
+    resetForm,
     serializedFields,
     form,
     errors,
