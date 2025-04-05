@@ -3,6 +3,7 @@ import AppSidebar from '~crm/components/layout/AppSidebar.vue'
 import useColorMode from '~crm/hooks/useColorMode'
 import { cn } from '~crm/lib/utils'
 import SidebarProvider from '../components/ui/sidebar/SidebarProvider.vue'
+import Toaster from '../components/ui/toast/Toaster.vue'
 
 const { syncColorMode } = useColorMode()
 
@@ -28,6 +29,7 @@ syncColorMode()
         <slot />
       </div>
     </SidebarProvider>
+    <Toaster />
   </ClientOnly>
 </template>
 
