@@ -7,6 +7,7 @@ export enum FieldType {
   Textarea = 'textarea',
   Text = 'text',
   Number = 'number',
+  RichEditor = 'richEditor'
 }
 
 interface Options {

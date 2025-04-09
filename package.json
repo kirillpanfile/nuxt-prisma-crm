@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@antfu/eslint-config": "^4.11.0",
+    "@vueup/vue-quill": "^1.2.0",
     "@vueuse/core": "^13.0.0",
     "class-variance-authority": "^0.7.1",
     "reka-ui": "^2.2.0",
