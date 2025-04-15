@@ -9,17 +9,33 @@ import {
 } from '~crm/components/ui/table'
 import useHttpRequest from '../hooks/useHttpRequest'
 
+enum AllowOnlyOneItem{
+  PrivacyPolicy
+}
+
 import { usePageMetadata } from '../hooks/usePageMetadata'
 
 const { currentAppInstance } = usePageMetadata()
 
-const { data } = useQuery({
+const { data, suspense } = useQuery({
   queryKey: ['private.admin.get-model-data', currentAppInstance.value?.model],
   queryFn: async () => {
     return await useHttpRequest<Record<string, any>>('/api/private/model-data', {
       params: { model: currentAppInstance.value?.model },
     })
   },
+})
+
+const emit = defineEmits<{
+  (e: 'checkLength', value: boolean) : void
+}>()
+
+onMounted(() => {
+  suspense()
+
+  if(typeof AllowOnlyOneItem[currentAppInstance.value.model] === 'number'){
+    emit('checkLength', data.value.length > 0)
+  }
 })
 
 const tableHeaders = computed(() => {
@@ -102,7 +118,3 @@ const serializeDataForTableRender = computed(() => {
 
   <div v-else class="flex items-center justify-center w-full h-full py-24 my-auto mt-8 text-2xl font-bold rounded-lg bg-muted/50 outline-muted outline outline-2">Table is empty!</div>
 </template>
-
-<style>
-
-</style>
