@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useQuery } from '#imports'
 import { Pencil, Trash } from 'lucide-vue-next'
 import {
   Table,
@@ -8,7 +9,6 @@ import {
   TableRow,
 } from '~crm/components/ui/table'
 import useHttpRequest from '../hooks/useHttpRequest'
-
 import { usePageMetadata } from '../hooks/usePageMetadata'
 
 const { currentAppInstance } = usePageMetadata()
@@ -67,10 +67,14 @@ const serializeDataForTableRender = computed(() => {
     }, {})
   })
 })
+
+defineExpose({
+  dataLength: computed(() => data.value?.length || 0),
+})
 </script>
 
 <template>
-  <Table class="w-full overflow-hidden rounded-md" v-if="serializeDataForTableRender.length > 0">
+  <Table v-if="serializeDataForTableRender.length > 0" class="w-full overflow-hidden rounded-md">
     <TableHeader>
       <TableRow>
         <TableHead
@@ -100,9 +104,7 @@ const serializeDataForTableRender = computed(() => {
     </TableBody>
   </Table>
 
-  <div v-else class="flex items-center justify-center w-full h-full py-24 my-auto mt-8 text-2xl font-bold rounded-lg bg-muted/50 outline-muted outline outline-2">Table is empty!</div>
+  <div v-else class="flex items-center justify-center w-full h-full py-24 my-auto mt-8 text-2xl font-bold rounded-lg bg-muted/50 outline-muted outline outline-2">
+    Table is empty!
+  </div>
 </template>
-
-<style>
-
-</style>
