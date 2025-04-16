@@ -1,12 +1,5 @@
 {
-  "version": "1.0.0",
-  "license": "ISC",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nuxi dev",
-    "build": "nuxi build",
-    "start": "node .output/server/index.mjs"
-  },
+  "name": "nuxt-prisma-crm",
   "dependencies": {
     "@antfu/eslint-config": "^4.11.0",
     "@vueup/vue-quill": "^1.2.0",
