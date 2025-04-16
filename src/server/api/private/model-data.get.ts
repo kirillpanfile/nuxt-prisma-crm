@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client'
-import prisma from '~crm/utils/prisma'
 import validateJWTToken from '~crm/server/helpers/validateToken'
+import prisma from '~crm/utils/prisma'
 
 interface RequestQuery {
   model: Prisma.ModelName

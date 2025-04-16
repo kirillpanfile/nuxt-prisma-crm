@@ -1,5 +1,4 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: ['selector', '[data-mode="dark"]'],
   content: [
     './src/components/**/*.{vue,js,ts,jsx,tsx}',
