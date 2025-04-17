@@ -53,7 +53,7 @@ const superUser = defineModel<Omit<SuperUser, 'id'>>('superUser', {
           <FormMessage />
         </FormItem>
       </FormField>
-      <Button type="submit" class="w-full mt-2">
+      <Button type="submit" class="w-full mt-2 cursor-pointer">
         Login
       </Button>
       <!-- <p class="px-8 mt-4 text-sm text-center text-muted-foreground">

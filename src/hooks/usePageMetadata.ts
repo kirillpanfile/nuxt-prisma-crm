@@ -12,11 +12,26 @@ export function usePageMetadata(overridePrismaCrmConfig?: any) {
     if (!app) {
       return null
     }
+
     return app
   })
+
+  const getDeleteProvider = async () => { 
+
+    const findDeleteProvider = Object.prototype.hasOwnProperty.call(currentAppInstance.value?.providers ?? {}, 'getDeleteMethod')
+
+    if(!findDeleteProvider){
+      return () => {
+        console.warn('Delete function Not Implemented!')
+      }
+    }
+
+    return await currentAppInstance.value.providers.getDeleteMethod()
+  }
 
   return {
     pageSlug,
     currentAppInstance,
+    getDeleteProvider,
   }
 }

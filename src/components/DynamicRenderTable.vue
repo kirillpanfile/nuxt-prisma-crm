@@ -11,7 +11,10 @@ import {
 import useHttpRequest from '../hooks/useHttpRequest'
 import { usePageMetadata } from '../hooks/usePageMetadata'
 
-const { currentAppInstance } = usePageMetadata()
+const { currentAppInstance, getDeleteProvider } = usePageMetadata()
+const deleteProvider = await getDeleteProvider()
+
+const { mutateAsync: deleteItem } = deleteProvider()
 
 const { data } = useQuery({
   queryKey: ['private.admin.get-model-data', currentAppInstance.value?.model],
@@ -71,6 +74,7 @@ const serializeDataForTableRender = computed(() => {
 defineExpose({
   dataLength: computed(() => data.value?.length || 0),
 })
+
 </script>
 
 <template>
@@ -93,10 +97,10 @@ defineExpose({
           {{ value }}
         </td>
         <td class="flex gap-1 px-4 py-4 text-sm font-medium whitespace-nowrap">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" class="cursor-pointer">
             <Pencil />
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" class="cursor-pointer" @click="deleteItem(item)">
             <Trash />
           </Button>
         </td>
@@ -104,7 +108,7 @@ defineExpose({
     </TableBody>
   </Table>
 
-  <div v-else class="flex items-center justify-center w-full h-full py-24 my-auto mt-8 text-2xl font-bold rounded-lg bg-muted/50 outline-muted outline outline-2">
+  <div v-else class="flex items-center justify-center w-full h-full py-24 my-auto mt-8 text-2xl font-bold rounded-lg bg-muted/50 outline-muted outline-2">
     Table is empty!
   </div>
 </template>
