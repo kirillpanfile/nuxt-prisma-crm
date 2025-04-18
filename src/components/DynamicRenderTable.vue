@@ -10,11 +10,11 @@ import {
 } from '~crm/components/ui/table'
 import useHttpRequest from '../hooks/useHttpRequest'
 import { usePageMetadata } from '../hooks/usePageMetadata'
+import { useToast } from './ui/toast'
 
-const { currentAppInstance, getDeleteProvider } = usePageMetadata()
-const deleteProvider = await getDeleteProvider()
-
-const { mutateAsync: deleteItem } = deleteProvider()
+const { currentAppInstance } = usePageMetadata()
+const queryClient = useQueryClient()
+const { toast } = useToast()
 
 const { data } = useQuery({
   queryKey: ['private.admin.get-model-data', currentAppInstance.value?.model],
@@ -22,6 +22,25 @@ const { data } = useQuery({
     return await useHttpRequest<Record<string, any>>('/api/private/model-data', {
       params: { model: currentAppInstance.value?.model },
     })
+  },
+})
+
+const { mutateAsync: deleteItem } = useMutation({
+  mutationFn: async (form: Record<string, number>) => {
+    const modelToKebabCase = currentAppInstance.value?.model?.replace(/([A-Z])/g, ' $1').trim().replace(/\b\w/g, char => char.toLowerCase()).replace(/\s+/g, '-')
+    return await useHttpRequest(`/api/delete/${modelToKebabCase}`, {
+      method: 'DELETE',
+      body: form,
+    })
+  },
+
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['private.admin.get-model-data'] })
+    toast({ title: 'Successfully deleted Privacy Policy', description: 'Page was created!' })
+  },
+  onError: (error: string) => {
+    console.log(error)
+    toast({ title: 'Something went wrong', variant: 'destructive', description: error })
   },
 })
 
@@ -74,7 +93,6 @@ const serializeDataForTableRender = computed(() => {
 defineExpose({
   dataLength: computed(() => data.value?.length || 0),
 })
-
 </script>
 
 <template>
