@@ -7,29 +7,49 @@ export enum FieldType {
   Textarea = 'textarea',
   Text = 'text',
   Number = 'number',
-  RichEditor = 'richEditor'
+  RichEditor = 'richEditor',
 }
 
-interface Options {
-  schema: Record<string, string>
-  fieldsToOmit?: string[]
-  customFieldTypes?: Record<string, any>
+interface Options<T> {
+  schema: {
+    properties: {
+      [key in keyof T]: {
+        type: string
+        required: boolean
+      }
+    }
+    required?: string[]
+  }
+  fieldsToOmit?: Array<Partial<keyof T>> | Array<string>
+  customFieldTypes?: {
+    [key in keyof T]?: {
+      type: FieldType
+      options?: {
+        label: string
+        value: string
+      }[]
+    }
+  }
 }
 
 export function getRootFormFields<T>({
-  schema = {},
+  schema,
   fieldsToOmit = [],
   customFieldTypes = {},
-}: Options) {
+}: Options<T>) {
   const form = ref<T>({} as T)
   const errors = ref<any>({})
   const formRef = ref<HTMLFormElement | null>(null)
 
   const typeMap = { integer: 'number', string: 'text' } as const
-  const fields = Object.entries(schema.properties).filter(([key]) => !fieldsToOmit.includes(key))
 
-  const serializedFields = fields.map(([key, data]: [string, any]) => {
-    const overideType = customFieldTypes[key as keyof typeof customFieldTypes]
+  const fields = Object.entries(schema.properties).filter(([key]) => !fieldsToOmit.includes(key as any)) as [keyof T, {
+    type: string
+    required?: boolean
+  }][]
+
+  const serializedFields = fields.map(([key, data]) => {
+    const overideType = customFieldTypes[key]
 
     data.type = typeMap[data.type as keyof typeof typeMap] || data.type
 
@@ -40,8 +60,8 @@ export function getRootFormFields<T>({
     return {
       key,
       data: {
-        required: schema.required.includes(key),
-        label: capitalize(key.replace(/([A-Z])/g, ' $1').trim()).trim(),
+        required: schema.required?.includes(key as string),
+        label: capitalize((key as string).replace(/([A-Z])/g, ' $1').trim()).trim(),
         ...(overideType?.options && { options: overideType.options }),
         ...data,
       },
@@ -56,7 +76,6 @@ export function getRootFormFields<T>({
   const resetForm = () => nextTick(() => {
     formRef.value?.reset()
   })
-  
 
   return {
     formRef,

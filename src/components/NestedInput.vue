@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import DatePicker from './DatePicker.vue'
+import RichEditor from './RichEditor.vue'
 import SelectInput from './SelectInput.vue'
 import Input from './ui/input/Input.vue'
 import Textarea from './ui/textarea/Textarea.vue'
-import RichEditor from './RichEditor.vue'
 
 const props = defineProps<{
   label?: string
