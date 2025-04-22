@@ -90,6 +90,15 @@ const serializeDataForTableRender = computed(() => {
   })
 })
 
+const router = useRouter()
+
+function updateItem(){
+  if(currentAppInstance.value.updateURL){
+    router.push({path: currentAppInstance.value.updateURL})
+  }
+  return
+}
+
 defineExpose({
   dataLength: computed(() => data.value?.length || 0),
 })
@@ -115,7 +124,7 @@ defineExpose({
           {{ value }}
         </td>
         <td class="flex gap-1 px-4 py-4 text-sm font-medium whitespace-nowrap">
-          <Button variant="ghost" size="icon" class="cursor-pointer">
+          <Button variant="ghost" size="icon" class="cursor-pointer" @click="updateItem()">
             <Pencil />
           </Button>
           <Button variant="ghost" size="icon" class="cursor-pointer" @click="deleteItem(item)">
